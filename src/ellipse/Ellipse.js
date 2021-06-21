@@ -14,26 +14,19 @@ const setXYR = (shape, x, y, rx, ry) => {
  */
 export const drawEllipse = (cx, cy, rx, ry) => {
   const g = document.createElementNS(SVG_NAMESPACE, 'g');
-  const innerEllipse  = document.createElementNS(SVG_NAMESPACE, 'ellipse');
   const outerEllipse  = document.createElementNS(SVG_NAMESPACE, 'ellipse');
-
-  innerEllipse.setAttribute('class', 'a9s-inner');
-  setXYR(innerEllipse, cx, cy, rx, ry);
 
   outerEllipse.setAttribute('class', 'a9s-outer');
   setXYR(outerEllipse, cx, cy, rx, ry);
 
   g.appendChild(outerEllipse);
-  g.appendChild(innerEllipse);
 
   return g;
 }
 
 export const setEllipseSize = (g, cx, cy, rx, ry) => {
-  const innerEllipse = g.querySelector('.a9s-inner');
   const outerEllipse = g.querySelector('.a9s-outer');
 
-  setXYR(innerEllipse, cx, cy, rx, ry);
   setXYR(outerEllipse, cx, cy, rx, ry);
 }
 

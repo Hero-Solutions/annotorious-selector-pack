@@ -33,7 +33,7 @@ export default class EditableEllipse extends EditableShape {
     this.containerGroup = document.createElementNS(SVG_NAMESPACE, 'g');
 
     this.ellipse = drawEmbeddedSVG(annotation);
-    this.ellipse.querySelector('.a9s-inner')
+    this.ellipse.querySelector('.a9s-outer')
       .addEventListener('mousedown', this.onGrab(this.ellipse));
 
     this.mask = new Mask(env.image, this.ellipse);

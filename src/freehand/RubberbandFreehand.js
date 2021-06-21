@@ -23,16 +23,12 @@ export default class RubberbandFreehand {
     this.outer = document.createElementNS(SVG_NAMESPACE, 'path');
     this.outer.setAttribute('class', 'a9s-outer');
 
-    this.inner = document.createElementNS(SVG_NAMESPACE, 'path');
-    this.inner.setAttribute('class', 'a9s-inner');
-
     this.setPoints(this.points);
 
    // TODO optional: mask to dim the outside area
-   // this.mask = new Mask(env.image, this.inner);
+   // this.mask = new Mask(env.image, this.outer);
 
     this.freehand.appendChild(this.outer);
-    this.freehand.appendChild(this.inner);
 
     // Additionally, selection remains hidden until 
     // the user actually moves the mouse
@@ -49,7 +45,6 @@ export default class RubberbandFreehand {
     var str = points.map(pt => `L${pt[0]} ${pt[1]}`).join(' ');
     str = 'M' + str.substring(1);
     this.outer.setAttribute('d', str);
-    this.inner.setAttribute('d', str);
   }
 
   getBoundingClientRect = () =>

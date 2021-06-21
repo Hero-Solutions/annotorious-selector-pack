@@ -22,7 +22,6 @@ export default class EditableCircle extends EditableShape {
     //   <path class="a9s-selection mask"... />
     //   <g> <-- return this node as .element
     //     <circle class="a9s-outer" ... />
-    //     <circle class="a9s-inner" ... />
     //     <g class="a9s-handle" ...> ... </g>
     //     <g class="a9s-handle" ...> ... </g>
     //     <g class="a9s-handle" ...> ... </g>
@@ -34,7 +33,7 @@ export default class EditableCircle extends EditableShape {
     this.containerGroup = document.createElementNS(SVG_NAMESPACE, 'g');
 
     this.circle = drawEmbeddedSVG(annotation);
-    this.circle.querySelector('.a9s-inner')
+    this.circle.querySelector('.a9s-outer')
       .addEventListener('mousedown', this.onGrab(this.circle));
 
     this.mask = new Mask(env.image, this.circle);

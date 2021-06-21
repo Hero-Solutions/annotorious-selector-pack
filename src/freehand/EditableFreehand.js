@@ -6,7 +6,7 @@ import { format, setFormatterElSize } from '@recogito/annotorious/src/util/Forma
 //import Mask from './FreehandMask';
 
 const getPoints = shape => {
-  const pointList = shape.querySelector('.a9s-inner').getAttribute('d').split('L');
+  const pointList = shape.querySelector('.a9s-outer').getAttribute('d').split('L');
   const points = [];
   if(pointList.length > 0) {
     var point = pointList[0].substring(1).trim().split(' ');
@@ -22,7 +22,7 @@ const getPoints = shape => {
 }
 
 const getBBox = shape => {
-  return shape.querySelector('.a9s-inner').getBBox();
+  return shape.querySelector('.a9s-outer').getBBox();
 }
 
 /**
@@ -42,7 +42,6 @@ export default class EditableFreehand extends EditableShape {
     //   <path class="a9s-selection mask"... />
     //   <g> <-- return this node as .element
     //     <polygon class="a9s-outer" ... />
-    //     <polygon class="a9s-inner" ... />
     //     <g class="a9s-handle" ...> ... </g>
     //     <g class="a9s-handle" ...> ... </g>
     //     <g class="a9s-handle" ...> ... </g>
@@ -56,7 +55,7 @@ export default class EditableFreehand extends EditableShape {
     this.shape = drawEmbeddedSVG(annotation);
 
    // TODO optional: mask to dim the outside area
-   // this.mask = new Mask(env.image, this.shape.querySelector('.a9s-inner'));
+   // this.mask = new Mask(env.image, this.shape.querySelector('.a9s-outer'));
     
    // this.containerGroup.appendChild(this.mask.element);
 
@@ -69,7 +68,7 @@ export default class EditableFreehand extends EditableShape {
 
     format(this.shape, annotation, config.formatter);
 
-    this.shape.querySelector('.a9s-inner')
+    this.shape.querySelector('.a9s-outer')
       .addEventListener('mousedown', this.onGrab(this.shape));
 
     const { x, y, width, height } = getBBox(this.shape);
@@ -104,9 +103,6 @@ export default class EditableFreehand extends EditableShape {
 
     var str = points.map(pt => `L${round(pt.x)} ${round(pt.y)}`).join(' ');
     str = 'M' + str.substring(1);
-
-    const inner = this.shape.querySelector('.a9s-inner');
-    inner.setAttribute('d', str);
 
     const outer = this.shape.querySelector('.a9s-outer');
     outer.setAttribute('d', str);
