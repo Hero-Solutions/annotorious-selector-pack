@@ -25,13 +25,13 @@ export const drawEllipse = (cx, cy, rx, ry) => {
 }
 
 export const setEllipseSize = (g, cx, cy, rx, ry) => {
-  const outerEllipse = g.querySelectorAll('.a9s-outer')[0];
+  const outerEllipse = g.querySelector('.a9s-outer');
 
   setXYR(outerEllipse, cx, cy, rx, ry);
 }
 
 export const getEllipseSize = g => {
-  const outerEllipse = g.querySelectorAll('.a9s-outer')[0];
+  const outerEllipse = g.querySelector('.a9s-outer');
 
   const cx = parseFloat(outerEllipse.getAttribute('cx'));
   const cy = parseFloat(outerEllipse.getAttribute('cy'));

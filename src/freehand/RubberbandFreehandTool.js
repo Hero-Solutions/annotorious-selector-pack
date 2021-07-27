@@ -22,7 +22,7 @@ export default class RubberbandFreehandTool extends Tool {
       dblClick: this.onDblClick
     });
     
-    this.rubberband = new RubberbandFreehand([ x, y ], this.g, this.env);
+    this.rubberband = new RubberbandFreehand([ x, y ], this.g, this.config, this.env);
   }
 
   stop = () => {

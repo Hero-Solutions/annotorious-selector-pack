@@ -31,9 +31,13 @@ export default class EditableCircle extends EditableShape {
 
     // 'g' for the editable circle compound shape
     this.containerGroup = document.createElementNS(SVG_NAMESPACE, 'g');
+    this.styleClass = annotation.target.styleClass;
+    if(this.styleClass) {
+      this.containerGroup.setAttribute('class', this.styleClass);
+    }
 
     this.circle = drawEmbeddedSVG(annotation);
-    this.circle.querySelectorAll('.a9s-outer')[0]
+    this.circle.querySelector('.a9s-outer')
       .addEventListener('mousedown', this.onGrab(this.circle));
 
     this.mask = new Mask(env.image, this.circle);
@@ -165,7 +169,7 @@ export default class EditableCircle extends EditableShape {
         const cy = constrain(pos.y - this.grabbedAt.y, naturalHeight - r);
 
         this.setSize(cx, cy, r); 
-        this.emit('update', toSVGTarget(this.circle, this.env.image)); 
+        this.emit('update', toSVGTarget(this.circle, this.styleClass, this.env.image)); 
       } else {
         // Mouse position replaces one of the corner coords, depending
         // on which handle is the grabbed element
@@ -174,7 +178,7 @@ export default class EditableCircle extends EditableShape {
           this.handles[handleIdx + 2] : this.handles[handleIdx - 2];
 
         this.stretchCorners(handleIdx, oppositeHandle, pos);
-        this.emit('update', toSVGTarget(this.circle, this.env.image));
+        this.emit('update', toSVGTarget(this.circle, this.styleClass, this.env.image));
       }
     }
   }

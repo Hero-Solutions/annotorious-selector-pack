@@ -10,12 +10,16 @@ import { SVG_NAMESPACE } from '@recogito/annotorious/src/util/SVG';
  */
 export default class RubberbandFreehand {
 
-  constructor(anchor, g, env) {
+  constructor(anchor, g, config, env) {
     this.points = [ anchor ];
 
     this.env = env;
 
     this.group = document.createElementNS(SVG_NAMESPACE, 'g');
+    this.styleClass = config.styleClass;
+    if(this.styleClass) {
+      this.group.setAttribute('class', this.styleClass);
+    }
 
     this.freehand = document.createElementNS(SVG_NAMESPACE, 'g');
     this.freehand.setAttribute('class', 'a9s-selection');
@@ -80,7 +84,7 @@ export default class RubberbandFreehand {
   }
 
   toSelection = () => {
-    return new Selection(toSVGTarget(this.group, this.env.image));
+    return new Selection(toSVGTarget(this.group, this.styleClass, this.env.image));
   }
 
 }

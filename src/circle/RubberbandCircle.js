@@ -10,12 +10,16 @@ import Mask from './CircleMask';
  */
 export default class RubberbandCircle {
 
-  constructor(anchorX, anchorY, g, env) {
+  constructor(anchorX, anchorY, g, config, env) {
     this.anchor = [ anchorX, anchorY ];
 
     this.env = env;
 
     this.group = document.createElementNS(SVG_NAMESPACE, 'g');
+    this.styleClass = config.styleClass;
+    if(this.styleClass) {
+      this.group.setAttribute('class', this.styleClass);
+    }
 
     this.circle = drawCircle(anchorX, anchorY, 2);
     this.circle.setAttribute('class', 'a9s-selection');
@@ -61,7 +65,7 @@ export default class RubberbandCircle {
     this.circle.getBoundingClientRect();
 
   toSelection = () => {
-    return new Selection(toSVGTarget(this.group, this.env.image));
+    return new Selection(toSVGTarget(this.group, this.styleClass, this.env.image));
   }
 
   destroy = () => {

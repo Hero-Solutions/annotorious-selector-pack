@@ -19,7 +19,7 @@ export default class RubberbandCircleTool extends Tool {
       mouseUp: this.onMouseUp
     });
 
-    this.rubberband = new RubberbandCircle(x, y, this.g, this.env);
+    this.rubberband = new RubberbandCircle(x, y, this.g, this.config, this.env);
   }
 
   stop = () => {

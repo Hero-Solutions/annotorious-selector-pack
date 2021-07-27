@@ -19,7 +19,7 @@ export default class RubberbandEllipseTool extends Tool {
       mouseUp: this.onMouseUp
     });
 
-    this.rubberband = new RubberbandEllipse(x, y, this.g, this.env);
+    this.rubberband = new RubberbandEllipse(x, y, this.g, this.config, this.env);
   }
 
   stop = () => {

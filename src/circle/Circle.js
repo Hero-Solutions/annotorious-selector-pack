@@ -24,13 +24,13 @@ export const drawCircle = (cx, cy, r) => {
 }
 
 export const setCircleSize = (g, cx, cy, r) => {
-  const outerCircle = g.querySelectorAll('.a9s-outer')[0];
+  const outerCircle = g.querySelector('.a9s-outer');
   
   setXYR(outerCircle, cx, cy, r);
 }
 
 export const getCircleSize = g => {
-  const outerCircle = g.querySelectorAll('.a9s-outer')[0];
+  const outerCircle = g.querySelector('.a9s-outer');
 
   const cx = parseFloat(outerCircle.getAttribute('cx'));
   const cy = parseFloat(outerCircle.getAttribute('cy'));

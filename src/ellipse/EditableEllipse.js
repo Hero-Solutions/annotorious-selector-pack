@@ -31,9 +31,13 @@ export default class EditableEllipse extends EditableShape {
 
     // 'g' for the editable ellipse compound shape
     this.containerGroup = document.createElementNS(SVG_NAMESPACE, 'g');
+    this.styleClass = annotation.target.styleClass;
+    if(this.styleClass) {
+      this.containerGroup.setAttribute('class', this.styleClass);
+    }
 
     this.ellipse = drawEmbeddedSVG(annotation);
-    this.ellipse.querySelectorAll('.a9s-outer')[0]
+    this.ellipse.querySelector('.a9s-outer')
       .addEventListener('mousedown', this.onGrab(this.ellipse));
 
     this.mask = new Mask(env.image, this.ellipse);
@@ -170,7 +174,7 @@ export default class EditableEllipse extends EditableShape {
         const cy = constrain(pos.y - this.grabbedAt.y, naturalHeight - ry);
 
         this.setSize(cx, cy, rx, ry); 
-        this.emit('update', toSVGTarget(this.ellipse, this.env.image));
+        this.emit('update', toSVGTarget(this.ellipse, this.styleClass, this.env.image));
       } else {
         // Mouse position replaces one of the corner coords, depending
         // on which handle is the grabbed element
@@ -180,7 +184,7 @@ export default class EditableEllipse extends EditableShape {
         const leftHandle = this.handles[(handleIdx + 3) % 4];
 
         this.stretchCorners(handleIdx, oppositeHandle, leftHandle, pos);
-        this.emit('update', toSVGTarget(this.ellipse, this.env.image));
+        this.emit('update', toSVGTarget(this.ellipse, this.styleClass, this.env.image));
       }
     }
   }
