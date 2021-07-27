@@ -6,7 +6,7 @@ import { format, setFormatterElSize } from '@recogito/annotorious/src/util/Forma
 //import Mask from './FreehandMask';
 
 const getPoints = shape => {
-  const pointList = shape.querySelector('.a9s-outer').getAttribute('d').split('L');
+  const pointList = shape.querySelectorAll('.a9s-outer')[0].getAttribute('d').split('L');
   const points = [];
   if(pointList.length > 0) {
     var point = pointList[0].substring(1).trim().split(' ');
@@ -22,7 +22,7 @@ const getPoints = shape => {
 }
 
 const getBBox = shape => {
-  return shape.querySelector('.a9s-outer').getBBox();
+  return shape.querySelectorAll('.a9s-outer')[0].getBBox();
 }
 
 /**
@@ -55,7 +55,7 @@ export default class EditableFreehand extends EditableShape {
     this.shape = drawEmbeddedSVG(annotation);
 
    // TODO optional: mask to dim the outside area
-   // this.mask = new Mask(env.image, this.shape.querySelector('.a9s-outer'));
+   // this.mask = new Mask(env.image, this.shape.querySelectorAll('.a9s-outer')[0]);
     
    // this.containerGroup.appendChild(this.mask.element);
 
@@ -68,7 +68,7 @@ export default class EditableFreehand extends EditableShape {
 
     format(this.shape, annotation, config.formatter);
 
-    this.shape.querySelector('.a9s-outer')
+    this.shape.querySelectorAll('.a9s-outer')[0]
       .addEventListener('mousedown', this.onGrab(this.shape));
 
     const { x, y, width, height } = getBBox(this.shape);
@@ -104,7 +104,7 @@ export default class EditableFreehand extends EditableShape {
     var str = points.map(pt => `L${round(pt.x)} ${round(pt.y)}`).join(' ');
     str = 'M' + str.substring(1);
 
-    const outer = this.shape.querySelector('.a9s-outer');
+    const outer = this.shape.querySelectorAll('.a9s-outer')[0];
     outer.setAttribute('d', str);
 
     const { x, y, width, height } = outer.getBBox();

@@ -33,6 +33,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@recogito/annotorious": "^2.4.4"
+    "@recogito/annotorious": "https://github.com/Hero-Solutions/annotorious/tarball/condition-reports"
   }
 }

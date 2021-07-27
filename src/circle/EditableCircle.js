@@ -33,7 +33,7 @@ export default class EditableCircle extends EditableShape {
     this.containerGroup = document.createElementNS(SVG_NAMESPACE, 'g');
 
     this.circle = drawEmbeddedSVG(annotation);
-    this.circle.querySelector('.a9s-outer')
+    this.circle.querySelectorAll('.a9s-outer')[0]
       .addEventListener('mousedown', this.onGrab(this.circle));
 
     this.mask = new Mask(env.image, this.circle);
